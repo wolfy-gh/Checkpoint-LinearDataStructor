@@ -1,0 +1,39 @@
+ALGORITHM Problem1_Sol2
+VAR
+    htab: HASH_TABLE<INTEGER,INTEGER>;
+    set1 : ARRAY_OF INTEGER[10];
+    set2 : ARRAY_OF INTEGER[10];
+    i : INTEGER;
+    count, sum: INTEGER ;
+BEGIN
+    set1 := {3, 1, 7, 9};
+    set2 := {2, 4, 1, 9 ,3} 
+    
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        IF (htab.lookup(set1[i]):= TRUE) THEN
+            count:= htab.get(set1[i]);
+            htab.insert(set1[i],count+1);
+        ELSE 
+            htab.insert(set1[i],1);
+        END_IF 
+    END_FOR
+        // return : htab :={[3,1],[1, 1],[7,1],[9,1]}
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+        IF (htab.lookup(set2[i]):= TRUE) THEN
+            count:= htab.get(set2[i]);
+            htab.insert(set2[i], count+1);
+        ELSE 
+            htab.insert(set2[i],1);
+        END_IF
+    END_FOR
+        // return : htab:= {[3,2],[1,2],[7,1],[9,2],[2,1],[4,1]}
+        // element which present in either of given set are : 2,4,7
+        // where count =1
+    FOR i IN htab DO
+        IF (htab.get(i):=1) THEN
+            sum := sum + i; // return : 2 + 4 + 7
+        END_IF     
+    END_FOR
+
+    Write(sum); // sum := 13
+END

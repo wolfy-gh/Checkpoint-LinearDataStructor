@@ -1,0 +1,38 @@
+ALGORITHM Problem2_Sol2
+VAR
+    htab: HASH_TABLE<INTEGER,INTEGER>;
+    set1 : ARRAY_OF INTEGER[10];
+    set2 : ARRAY_OF INTEGER[10];
+    i : INTEGER;
+    count: INTEGER :=1;
+    sum : INTEGER :=0;
+BEGIN
+    set1 := {12, 13, 6, 10};
+    set2 := {13, 10, 16, 15} 
+    
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+        IF (htab.lookup(set1[i]):= TRUE) THEN
+            count:= htab.get(set1[i]);
+            htab.insert(set1[i],count+1);
+        ELSE 
+            htab.insert(set1[i],1); 
+        END_IF
+    END_FOR
+        // return : htab :={[12,1],[13, 1],[6,1],[10,1]}
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+        IF (htab.lookup(set2[i]):= TRUE) THEN
+            count:= htab.get(set2[i]);
+            htab.insert(set2[i], count+1);
+        ELSE 
+            htab.insert(set2[i],1);
+        END_IF
+    END_FOR
+        // return : htab:= {[12,1],[13,2],[6,1],[10,2],[16,1],[15,1]}
+        // common element 13 and 10 where count > 1
+    FOR i IN htab DO
+        IF (htab.get(i)>1) THEN
+            sum := sum + (2 * i); // return (2*13)+(2*10) 
+        END_IF    
+    END_FOR
+    Write(sum); // sum := 46
+END
