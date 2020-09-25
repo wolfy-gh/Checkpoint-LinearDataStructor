@@ -3,6 +3,7 @@ VAR
     htab: HASH_TABLE<INTEGER,INTEGER>;
     set1 : ARRAY_OF INTEGER[10];
     set2 : ARRAY_OF INTEGER[10];
+    tab : ARRAY_OF INTEGER[10];
     i ,count: INTEGER;
     sum : INTEGER :=0;
 BEGIN
@@ -28,10 +29,11 @@ BEGIN
     END_FOR
         // return : htab:= {[12,1],[13,2],[6,1],[10,2],[16,1],[15,1]}
         // common element 13 and 10 where count > 1
-    FOR i IN htab DO
-        IF (htab.get(i)>1) THEN
-            sum := sum + (2 * i); // return (2*13)+(2*10) 
-        END_IF    
+    tab := htab.getkeys();// return an array of hash tables keys [12,13,6,10,16,15]
+    FOR i FROM 0 TO tab.length -1 STEP 1  DO
+        IF (htab.get(tab[i])>1) THEN
+            sum := sum + (2* tab[i]); // return : (2*13)+(2*10)
+        END_IF     
     END_FOR
     Write(sum); // sum := 46
-END
+END 

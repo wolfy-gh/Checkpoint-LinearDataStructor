@@ -3,6 +3,7 @@ VAR
     htab: HASH_TABLE<INTEGER,INTEGER>;
     set1 : ARRAY_OF INTEGER[10];
     set2 : ARRAY_OF INTEGER[10];
+    tab : ARRAY_OF INTEGER[10];
     i ,count: INTEGER;
     sum: INTEGER :=0 ;
 BEGIN
@@ -29,9 +30,10 @@ BEGIN
         // return : htab:= {[3,2],[1,2],[7,1],[9,2],[2,1],[4,1]}
         // element which present in either of given set are : 2,4,7
         // where count =1
-    FOR i IN htab DO
-        IF (htab.get(i):=1) THEN
-            sum := sum + i; // return : 2 + 4 + 7
+    tab := htab.getkeys(); // return an array of hash tables keys [3,1,7,9,2,4]
+    FOR i FROM 0 TO tab.length -1 STEP 1  DO
+        IF (htab.get(tab[i]):=1) THEN
+            sum := sum + tab[i]; // return : 2 + 4 + 7
         END_IF     
     END_FOR
 
