@@ -3,8 +3,7 @@ VAR
     htab: HASH_TABLE<INTEGER,INTEGER>;
     set1 : ARRAY_OF INTEGER[10];
     set2 : ARRAY_OF INTEGER[10];
-    i : INTEGER;
-    count: INTEGER :=1;
+    i ,count: INTEGER;
     sum : INTEGER :=0;
 BEGIN
     set1 := {12, 13, 6, 10};
